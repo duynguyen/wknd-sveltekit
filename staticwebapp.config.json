@@ -1,0 +1,11 @@
+{
+  "trailingSlash": "auto",
+  "routes": [
+    {
+      "route": "/*",
+      "headers": {
+        "Cache-Control": "public, max-age=120, must-revalidate"
+      }
+    }
+  ]
+}

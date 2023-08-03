@@ -1,5 +1,10 @@
 # WKND SvelteKit
 
+
+
+
+
+
 Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
 
 ## Creating a project
@@ -13,6 +18,8 @@ npm create svelte@latest
 # create a new project in my-app
 npm create svelte@latest my-app
 ```
+
+
 
 
 ## Developing
@@ -37,3 +44,5 @@ npm run build
 You can preview the production build with `npm run preview`.
 
 > To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+
+
