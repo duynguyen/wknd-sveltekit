@@ -1,7 +1,7 @@
 <section class="">
   <div class="bg-white">
-    <div class="max-w-2xl px-4 sm:pt-20 lg:pt-20 mx-auto py-16 sm:px-6 lg:max-w-7xl lg:px-8">
-      <h2 class="pb-3 text-2xl font-extrabold tracking-tight text-gray-900">
+    <div class="max-w-2xl px-4 py-10 mx-auto sm:py-16 sm:px-6 lg:max-w-7xl lg:px-8">
+      <h2 class="text-2xl font-extrabold tracking-tight text-gray-900">
         Your next adventures can be one of these...
       </h2>
       {#if adventures}
@@ -17,7 +17,6 @@
         <Carousel numItems={4}>
           {#each adventures.slice(0, 4) as { _path, title, price, tripLength, primaryImage }}
             <AdventureCard
-                    class="h-full"
               showDetails={false}
               _path={_path}
               href={`/adventures/${_path.split('/').slice(-2).join('/')}`}
@@ -32,13 +31,14 @@
 
         <div class=category-buttons>
           {#each categoryFilters as { label, predicate }}
-          <button aria-label={label} class="category-button" on:click={() => (filteredAdventures = adventures.filter(predicate))}>{label}</button>
+          <button class="category-button" on:click={() => (filteredAdventures = adventures.filter(predicate))}>{label}</button>
         {/each}
         </div>
 
         <div class="grid grid-cols-1 mt-6 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
           {#each filteredAdventures as { _path, title, price, tripLength, primaryImage } (_path)}
-          <div>
+          <div in:receive="{{key: _path}}"
+          out:send="{{key: _path}}" animate:flip={{ duration: 300 }}>
             <AdventureCard
               _path={_path}
               href={`/adventures/${_path.split('/').slice(-2).join('/')}`}
@@ -52,7 +52,7 @@
           {/each}
         </div>
       {:else}
-        <div>Adventure could not be loaded. AEM Backend likely hibernated</div>
+        <div>Adventure could not be loaded. AEM Backend likely hybernated</div>
       {/if}
     </div>
   </div>
@@ -60,34 +60,33 @@
 
 <script>
   import AdventureCard from './AdventureCard.svelte';
-  // import HeroAdventure from './HeroAdventure.svelte';
+  import HeroAdventure from './HeroAdventure.svelte';
   import Carousel from './Carousel.svelte';
 	import { quintOut } from 'svelte/easing';
 	import { crossfade } from 'svelte/transition';
 	import { flip } from 'svelte/animate';
   import { PUBLIC_AEM_HOST } from '$env/static/public';
 
-	// const [send, receive] = crossfade({
-	// 	duration: d => Math.sqrt(d * 200),
-    //
-	// 	fallback(node, params) {
-	// 		const style = getComputedStyle(node);
-	// 		const transform = style.transform === 'none' ? '' : style.transform;
-    //
-	// 		return {
-	// 			duration: 300,
-	// 			easing: quintOut,
-	// 			css: t => `
-	// 				transform: ${transform} scale(${t});
-	// 				opacity: ${t}
-	// 			`
-	// 		};
-	// 	}
-	// });
+	const [send, receive] = crossfade({
+		duration: d => Math.sqrt(d * 200),
+
+		fallback(node, params) {
+			const style = getComputedStyle(node);
+			const transform = style.transform === 'none' ? '' : style.transform;
+
+			return {
+				duration: 300,
+				easing: quintOut,
+				css: t => `
+					transform: ${transform} scale(${t});
+					opacity: ${t}
+				`
+			};
+		}
+	});
 
   /** @type {import('./$types').PageData} */
   export let data;
-
 
   export let adventures = data.adventures;
   const imageSrcBase = PUBLIC_AEM_HOST;

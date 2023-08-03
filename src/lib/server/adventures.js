@@ -42,27 +42,17 @@ export class AdventureClient {
       adventureList {
         items {
           _path
-            title
-            activity
-            adventureType
-            price
-            tripLength
-            groupSize
-            difficulty
-            primaryImage {
-              ... on ImageRef {
-                _path
-                mimeType
-                width
-                height
-              }
+          title
+          price
+          tripLength
+          primaryImage {
+            ... on ImageRef {
+              _path
+              mimeType
+              width
+              height
             }
-            description {
-                html
-            }
-            itinerary {
-              html
-            }
+          }
         }
       }
     }
