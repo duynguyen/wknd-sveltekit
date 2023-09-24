@@ -26,7 +26,7 @@
   
               <div class="mt-4 lg:mt-0 lg:row-span-3">
                 <h2 class="sr-only">Product information</h2>
-                <p class="text-3xl text-gray-900 mb-10">{adventure.price}</p>
+                <p class="text-3xl text-gray-900 mb-10">$<span itemprop='price' itemtype='text'>{adventure.price}</span></p>
                 <dl>
                   <div class="py-5 sm:grid sm:grid-cols-3 sm:gap-4">
                     <dt class="text-sm font-medium text-gray-500">Activity</dt>

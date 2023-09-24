@@ -24,7 +24,6 @@ export const config = {
 export async function load({ params }) {
 
     try {
-        
         const cfPath = `/content/dam/aem-demo-assets/en/adventures/${params.path1}/${params.path2}`;
         console.log('loading adventure from path: ' + cfPath + '');
         const adventure = await getAdventureByPath(cfPath);
